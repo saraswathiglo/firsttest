@@ -56,7 +56,10 @@ Route::get('/abctesturl', function () {
     );
 });*/
 
-
+Route::get('/', function (\Illuminate\Http\Request $request) {
+    $user = $request->user();
+    dd($user->hasRole('User'));
+});
 
 
 Auth::routes();

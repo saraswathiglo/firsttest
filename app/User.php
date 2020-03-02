@@ -28,10 +28,10 @@ class User extends Authenticatable
     ];
 
 
-    public function roles()
+    /*public function roles()
     {
         return $this->belongsToMany('App\Role')->withTimestamps();
-    }
+    }*/
 
     public function authorizeRoles($roles)
     {
@@ -55,12 +55,34 @@ class User extends Authenticatable
         }
         return false;
     }
-    public function hasRole($role)
+    /*public function hasRole($role)
     {
         if ($this->roles()->where('name', $role)->first()) {
             return true;
         }
         return false;
+    }*/
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'user_roles');
     }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class,'user_permissions');
+    }
+    public function hasRole($role)
+    {
+        foreach($roles as $role)
+        {
+            if($this->roles->contains('name',$role))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
