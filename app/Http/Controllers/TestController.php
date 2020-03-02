@@ -13,6 +13,7 @@ use App\Link;
 		}
 
 		public function show(){
+
 		}
 		public function create(){
 			//$articles = new Link();
